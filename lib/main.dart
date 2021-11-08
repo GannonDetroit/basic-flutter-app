@@ -67,6 +67,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _resetQuiz() {
+    setState(() {
+      _questionIndex = 0;
+      _totalScore = 0;
+    });
+  }
+
   @override
   //build is a special object type provided by flutter via material.dart that is needed for flutter to work in the background properly.
   Widget build(BuildContext context) {
@@ -86,7 +93,7 @@ class _MyAppState extends State<MyApp> {
                   questionIndex: _questionIndex,
                   questions: _questions,
                 )
-              : Result(_totalScore)),
+              : Result(_totalScore, _resetQuiz)),
     );
   }
 }
