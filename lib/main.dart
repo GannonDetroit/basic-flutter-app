@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './question.dart';
 
 void main() {
   //runApp is a function from material.dart that runs your app by drawing up the widget tree. don't forget to invoke with ().
@@ -10,19 +11,20 @@ void main() {
 
 // all classes need to be stateful or stateless (like old react components) and run the build method.
 class MyApp extends StatefulWidget {
-  //the reason a stateful widget has these two classes is because of the rerender effect from outside data. normally everything would be reset
+  //the reason a stateful widget has these two classes is because of the rerender effect from outside data via the widget constructor. normally everything would be reset
   //but with a stateful widget we can allow local widget state to persist and not be overwritten, which is a major point/reason you would want a
   //stateful widget to begin with, so only widget internal effects affect the state, if it was just external then a stateless widget would suffice.
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
-//
+//the _ makes this class a private property/class, meaning it can only be used the MyApp class. This helps prevent bugs by not allowing other classes or files
+//to access this class, the _ can be applied to functions and variables too.
 class _MyAppState extends State<MyApp> {
   // best practice is to keep all data/variable/functions inside the class so its a standalone class.
-  var questionIndex = 0;
+  var _questionIndex = 0;
 
-  var questions = [
+  var _questions = [
     'Who\'s your favorite waifu',
     'Who\'s your favorite husbando',
     'What is your favorite Shonen'
@@ -30,9 +32,9 @@ class _MyAppState extends State<MyApp> {
 
   void answerQuestion() {
     setState(() {
-      questionIndex = questionIndex + 1;
+      _questionIndex = _questionIndex + 1;
     });
-    print(questionIndex);
+    print(_questionIndex);
   }
 
   @override
@@ -48,7 +50,8 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Text(questions[questionIndex]),
+              // Text(_questions[_questionIndex]),
+              Question(_questions[_questionIndex]),
               ElevatedButton(
                   onPressed: answerQuestion,
                   child: Text(

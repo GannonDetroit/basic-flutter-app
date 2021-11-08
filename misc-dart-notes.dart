@@ -60,4 +60,7 @@ void main() {
 /*
 a stateless widget will build/render and if its external input data (so a score/counter/api data update/etc) that comes from the widget's constructor changes the entire widget will rerender and build
 BUT if data inside that stateless widget changes, it will NOT rerender. That is when you stateful widget (or have the internal widget data come from an outside widget)
+
+the render is a bit like a virutal dom in react, when a state-driven rerender is triggered it only calls the build method of the widget that has the change and only rerenders the
+handful of pixels of the change, not the entire widget worth of pixels. this is part of what makes flutter fast and efficient. 
 */
