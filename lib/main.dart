@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './question.dart';
+import './answer.dart';
 
 void main() {
   //runApp is a function from material.dart that runs your app by drawing up the widget tree. don't forget to invoke with ().
@@ -19,7 +20,7 @@ class MyApp extends StatefulWidget {
 }
 
 //the _ makes this class a private property/class, meaning it can only be used the MyApp class. This helps prevent bugs by not allowing other classes or files
-//to access this class, the _ can be applied to functions and variables too.
+//to access this class, the _ can be applied to functions and variables too. Note: its accessible in child widgets apparently though still.
 class _MyAppState extends State<MyApp> {
   // best practice is to keep all data/variable/functions inside the class so its a standalone class.
   var _questionIndex = 0;
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
     'What is your favorite Shonen?'
   ];
 
-  void answerQuestion() {
+  void _answerQuestion() {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -50,20 +51,11 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              // Text(_questions[_questionIndex]),
               Question(_questions[_questionIndex]),
-              ElevatedButton(
-                  onPressed: answerQuestion,
-                  child: Text(
-                      'Answer 1')), //notice you don't invoke the answerQuestion function. This is like React, if you do it will run when rendered instead of when clicked.
-              ElevatedButton(
-                  onPressed: answerQuestion, child: Text('Answer 2')),
-              ElevatedButton(
-                  onPressed: answerQuestion, child: Text('Answer 3')),
-              ElevatedButton(
-                  onPressed: () => answerQuestion(),
-                  child: Text(
-                      'Answer 4')), //an example of using an anon function, even though i'm using a named function.
+              Answer(_answerQuestion),
+              Answer(_answerQuestion),
+              Answer(_answerQuestion),
+              Answer(_answerQuestion)
             ],
           )),
     );
