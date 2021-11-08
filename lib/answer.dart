@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  //if this gives you in issue (it didn't now but I was warned it could have, look into VoidCallback)
-  final Function selectHandler;
+  //VoidCallback is a more precise Type compared to the more general Function type
+  final VoidCallback selectHandler;
 
   final String answerText;
 

@@ -5,7 +5,8 @@ int addNumbers(int num1, int num2) {
 
 //a class with various data types, this is intitiated but can of course just be blank and given a name/age when a new object is created from this class.
 class Person {
-  String name;
+  String
+      name; //if using version 2.12 with Null saftey, you'll need to add late to front of this.
   int age;
   var role;
 
@@ -55,7 +56,6 @@ void main() {
   print(result);
 }
 
-
 //Stateful vs Statless and rendering
 /*
 a stateless widget will build/render and if its external input data (so a score/counter/api data update/etc) that comes from the widget's constructor changes the entire widget will rerender and build
@@ -63,4 +63,31 @@ BUT if data inside that stateless widget changes, it will NOT rerender. That is 
 
 the render is a bit like a virutal dom in react, when a state-driven rerender is triggered it only calls the build method of the widget that has the change and only rerenders the
 handful of pixels of the change, not the entire widget worth of pixels. this is part of what makes flutter fast and efficient. 
+*/
+
+//trick with if statements:
+/*
+if (userName = 'gannon' && password = 'password' || age > 20){
+  logged in
+} else{
+  Failed
+}
+
+you can group and control those different requirements with ( )
+so if you want to make the username required and then either password or age do this:
+(userName = 'gannon' && (password = 'password' || age > 20))
+etc.
+
+*/
+
+//regarding Null Safety in version 2.12+
+/*
+Null safety is basically to help with error/bug reduction and saftey as far as I can tell. 
+its introduced in version 2.12 and requires some minor changes to avoid things being null when they 'shouldn't be' and is generally not too bad to deal with.
+there are examples in this code of what to do to deal with it.
+
+one note, if you want a variable to be able to be null or its normal type, like a variable thats a string as a value do this:
+String? username = 'gannon' 
+this will allow you to change this variable to null in the future if you so want to and not trip up Null Safety. 
+
 */

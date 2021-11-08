@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   // if you hover over questions you see List<Map<String, Object> thats because question is a list of a maps that contain strings and mixed data. in this case another list full of strings. but since thats a bit much it will default to the parent title of just Object since 'everything is an object'.
-  var questions = [
+  final questions = const [
     //this is an array of objects in javascript but in flutter its a list of maps.
     {
       'questionText': 'Who\'s your favorite waifu?',
@@ -46,7 +46,9 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    print(_questionIndex);
+    // if (_questionIndex < questions.length){
+
+    // }
   }
 
   @override
@@ -60,17 +62,22 @@ class _MyAppState extends State<MyApp> {
           appBar: AppBar(
             title: Text('My First Title'),
           ),
-          body: Column(
-            children: [
-              //didn't give me an error but if it did, doing: questions[_questionIndex]['questionText'] as String : may have fixed it.
-              Question(questions[_questionIndex]['questionText']),
-              //the spread operator ... is used so I don't have this list in a list, but instead of the values of the list to a list, avoids nesting lists and errors that flutter would throw if I did that.
-              ...(questions[_questionIndex]['answers'] as List<String>)
-                  .map((answer) {
-                return Answer(answerQuestion, answer);
-              }).toList()
-            ],
-          )),
+          //example of use of trenary expression in UI.
+          body: _questionIndex < questions.length
+              ? Column(
+                  children: [
+                    //didn't give me an error but if it did, doing: questions[_questionIndex]['questionText'] as String : will fix it, this is due to Null Safety from Dart 2.12
+                    Question(questions[_questionIndex]['questionText']),
+                    //the spread operator ... is used so I don't have this list in a list, but instead of the values of the list to a list, avoids nesting lists and errors that flutter would throw if I did that.
+                    ...(questions[_questionIndex]['answers'] as List<String>)
+                        .map((answer) {
+                      return Answer(answerQuestion, answer);
+                    }).toList()
+                  ],
+                )
+              : Center(
+                  child: Text('Quiz Complete!'),
+                )),
     );
   }
 }
