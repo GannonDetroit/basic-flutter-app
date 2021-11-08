@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import './question.dart';
-import './answer.dart';
+import './quiz.dart';
+import './result.dart';
 
 void main() {
   //runApp is a function from material.dart that runs your app by drawing up the widget tree. don't forget to invoke with ().
@@ -64,20 +64,13 @@ class _MyAppState extends State<MyApp> {
           ),
           //example of use of trenary expression in UI.
           body: _questionIndex < questions.length
-              ? Column(
-                  children: [
-                    //didn't give me an error but if it did, doing: questions[_questionIndex]['questionText'] as String : will fix it, this is due to Null Safety from Dart 2.12
-                    Question(questions[_questionIndex]['questionText']),
-                    //the spread operator ... is used so I don't have this list in a list, but instead of the values of the list to a list, avoids nesting lists and errors that flutter would throw if I did that.
-                    ...(questions[_questionIndex]['answers'] as List<String>)
-                        .map((answer) {
-                      return Answer(answerQuestion, answer);
-                    }).toList()
-                  ],
+              ? Quiz(
+                  //using named functions just for exercise.
+                  answerQuestion: answerQuestion,
+                  questionIndex: _questionIndex,
+                  questions: questions,
                 )
-              : Center(
-                  child: Text('Quiz Complete!'),
-                )),
+              : Result()),
     );
   }
 }
