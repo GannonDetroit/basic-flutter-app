@@ -25,9 +25,9 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   var _questions = [
-    'Who\'s your favorite waifu',
-    'Who\'s your favorite husbando',
-    'What is your favorite Shonen'
+    'Who\'s your favorite waifu?',
+    'Who\'s your favorite husbando?',
+    'What is your favorite Shonen?'
   ];
 
   void answerQuestion() {
