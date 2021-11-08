@@ -26,29 +26,45 @@ class _MyAppState extends State<MyApp> {
   var _questionIndex = 0;
 
   // if you hover over questions you see List<Map<String, Object> thats because question is a list of a maps that contain strings and mixed data. in this case another list full of strings. but since thats a bit much it will default to the parent title of just Object since 'everything is an object'.
-  final questions = const [
+  final _questions = const [
     //this is an array of objects in javascript but in flutter its a list of maps.
     {
       'questionText': 'Who\'s your favorite waifu?',
-      'answers': ['Asuna', 'Holo', 'Esdeath', 'Zero Two'],
+      'answers': [
+        {'text': 'Asuna', 'score': 5},
+        {'text': 'Holo', 'score': 10},
+        {'text': 'Esdeath', 'score': 2},
+        {'text': 'Zero Two', 'score': 3}
+      ],
     },
     {
       'questionText': 'Who\'s your favorite husbando?',
-      'answers': ['Soma', 'Deku', 'Sasuka', 'Dio']
+      'answers': [
+        {'text': 'Soma', 'score': 7},
+        {'text': 'Deku', 'score': 4},
+        {'text': 'Sasuke', 'score': 2},
+        {'text': 'Dio', 'score': 1}
+      ],
     },
     {
       'questionText': 'What is your favorite Shonen?',
-      'answers': ['Naruto', 'One Piece', 'Bleach', 'My Hero Academia']
+      'answers': [
+        {'text': 'Naruto', 'score': 5},
+        {'text': 'One Piece', 'score': 10},
+        {'text': 'Bleach', 'score': 7},
+        {'text': 'My Hero Academia', 'score': 3}
+      ],
     }
   ];
 
-  void answerQuestion() {
+  var _totalScore = 0;
+
+  void _answerQuestion(int score) {
+    _totalScore += score;
+
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
-    // if (_questionIndex < questions.length){
-
-    // }
   }
 
   @override
@@ -60,17 +76,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            title: Text('My First Title'),
+            title: Text('What Type of Anime Fan Are You?'),
           ),
           //example of use of trenary expression in UI.
-          body: _questionIndex < questions.length
+          body: _questionIndex < _questions.length
               ? Quiz(
                   //using named functions just for exercise.
-                  answerQuestion: answerQuestion,
+                  answerQuestion: _answerQuestion,
                   questionIndex: _questionIndex,
-                  questions: questions,
+                  questions: _questions,
                 )
-              : Result()),
+              : Result(_totalScore)),
     );
   }
 }
