@@ -54,3 +54,10 @@ void main() {
   var result = addNumbers(1, 5);
   print(result);
 }
+
+
+//Stateful vs Statless and rendering
+/*
+a stateless widget will build/render and if its external input data (so a score/counter/api data update/etc) that comes from the widget's constructor changes the entire widget will rerender and build
+BUT if data inside that stateless widget changes, it will NOT rerender. That is when you stateful widget (or have the internal widget data come from an outside widget)
+*/
