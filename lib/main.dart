@@ -25,13 +25,24 @@ class _MyAppState extends State<MyApp> {
   // best practice is to keep all data/variable/functions inside the class so its a standalone class.
   var _questionIndex = 0;
 
-  var _questions = [
-    'Who\'s your favorite waifu?',
-    'Who\'s your favorite husbando?',
-    'What is your favorite Shonen?'
+  // if you hover over questions you see List<Map<String, Object> thats because question is a list of a maps that contain strings and mixed data. in this case another list full of strings. but since thats a bit much it will default to the parent title of just Object since 'everything is an object'.
+  var questions = [
+    //this is an array of objects in javascript but in flutter its a list of maps.
+    {
+      'questionText': 'Who\'s your favorite waifu?',
+      'answers': ['Asuna', 'Holo', 'Esdeath', 'Zero Two'],
+    },
+    {
+      'questionText': 'Who\'s your favorite husbando?',
+      'answers': ['Soma', 'Deku', 'Sasuka', 'Dio']
+    },
+    {
+      'questionText': 'What is your favorite Shonen?',
+      'answers': ['Naruto', 'One Piece', 'Bleach', 'My Hero Academia']
+    }
   ];
 
-  void _answerQuestion() {
+  void answerQuestion() {
     setState(() {
       _questionIndex = _questionIndex + 1;
     });
@@ -51,11 +62,13 @@ class _MyAppState extends State<MyApp> {
           ),
           body: Column(
             children: [
-              Question(_questions[_questionIndex]),
-              Answer(_answerQuestion),
-              Answer(_answerQuestion),
-              Answer(_answerQuestion),
-              Answer(_answerQuestion)
+              //didn't give me an error but if it did, doing: questions[_questionIndex]['questionText'] as String : may have fixed it.
+              Question(questions[_questionIndex]['questionText']),
+              //the spread operator ... is used so I don't have this list in a list, but instead of the values of the list to a list, avoids nesting lists and errors that flutter would throw if I did that.
+              ...(questions[_questionIndex]['answers'] as List<String>)
+                  .map((answer) {
+                return Answer(answerQuestion, answer);
+              }).toList()
             ],
           )),
     );

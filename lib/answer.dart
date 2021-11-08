@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 class Answer extends StatelessWidget {
-  final Function
-      selectHandler; //if this gives you in issue (it didn't now but I was warned it could have, look into VoidCallback)
+  //if this gives you in issue (it didn't now but I was warned it could have, look into VoidCallback)
+  final Function selectHandler;
 
-  Answer(this.selectHandler);
+  final String answerText;
+
+  Answer(this.selectHandler, this.answerText);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +16,7 @@ class Answer extends StatelessWidget {
           style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors
                   .blue)), //did this as demo for myself but one of the advantages of ElevatedButton over RaisedButton is that it will actually pick up your main theme color by default. So you don't even need to add that custom blue background color - since our main theme uses Colors.blue as a primarySwatch, the ElevatedButton will assume a blue background color out of the box
-          child: Text('Answer 1'),
+          child: Text(answerText),
           onPressed: selectHandler,
         ));
   }
