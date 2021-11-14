@@ -1,4 +1,6 @@
 //a function that specifies the data types of its return and its parameters.
+import 'package:flutter/material.dart';
+
 int addNumbers(int num1, int num2) {
   return num1 + num2;
 }
@@ -90,4 +92,33 @@ one note, if you want a variable to be able to be null or its normal type, like 
 String? username = 'gannon' 
 this will allow you to change this variable to null in the future if you so want to and not trip up Null Safety. 
 
+*/
+
+
+//old flutter buttons vs new flutter buttons
+/* 
+the nice thing about the new buttons is they automatically adapt your color theme styles so you spend much less time/code styling this buttons
+but if you need to style a one off, you use a style: ButtonStyle argument to the ElevatedButton (old way you just put the style name like color)
+so this new way is a bit more tedious but shouldn't need to be done as often. 
+
+RaisedButton = ElevatedButton
+FlatButton = TextButton
+OutlineButton = OutlinedButton
+
+*/
+
+//debugging
+/*
+run and click with debugger if you need to solve an advance/hard to find issue that just using print statements or general errors are not helping you with.
+don't do this all the time because running in debug mode makes the app run much slower and will kill your productivity time.
+
+you can also click control + options D (or command shift P to open the menu to select the Dart DevTools) to open Dart DevTools. This will be like accessing
+inspect in browser based apps. This allows you to view UI elements, test performance,  etc. SUPER USEFUL.
+-select widget allows you to click the widget you want in the simulator, see its border and get more info on it in the devtools.
+-debut paint shows you an overlay with helperlines over every widget in the app for a large scale understand on why your UI looks the way it is. 
+-be aware that using performace checking on a simulator is always MUCH worse than how your app would actually run on a device in production so take with a grain of salt. 
+-you can also turn off the annoying 'debug' banner in the upper corner too by clicking debug banner button
+-repaint rainbow is useful because when you click something in your UI that changes the app, like a button, this feature will highlight with colors around 
+everything that changed, so it can be helpful in spotting things that change that you were not aware of and that shouldn't be changing. helping with performace.
+  -note that repainting is not always the same as recreating, but repainting still takes more performance that just leaving it alone. 
 */
